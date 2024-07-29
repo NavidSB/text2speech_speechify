@@ -1,3 +1,25 @@
+"""
+Copyright (c) 2024 NavidSB
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files, to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,13 +28,19 @@ import time
 
 class speechify:
 
-    def __init__(self, driver, language='persian', new_description=""):
+    def __init__(self,language='persian'):
         '''
         languages:
         persian, spanish, french, german, afrikaans, arabic
         '''
-        self.driver = driver
-        self.new_description = new_description
+        # Set up Chrome options to ignore certificate errors
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--headless')  # Run in headless mode
+        chrome_options.add_argument('--ignore-certificate-errors')
+        chrome_options.add_argument('--ignore-ssl-errors')
+
+        # Replace 'path/to/chromedriver' with the actual path to your ChromeDriver
+        self.driver = webdriver.Chrome(options=chrome_options)
         self.language = language
 
     def check_popup(self):
@@ -69,7 +97,6 @@ class speechify:
 
     def text2speech(self, new_description):
         self.new_description = new_description
-        print("New: ", self.new_description)
         self.driver.get(f'https://speechify.com/text-to-speech-online/{self.language}/')
         time.sleep(10)
         self.paste_text()
