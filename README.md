@@ -1,4 +1,4 @@
-# README.md # Speechify text to speech
+# Speechify text to speech
 
 This repository contains a Python script for converting text to speech using the Speechify web service. The script leverages Selenium to interact with the Speechify website and supports multiple languages, including Persian, Spanish, French, German, Afrikaans, and Arabic.
 
@@ -17,7 +17,7 @@ This repository contains a Python script for converting text to speech using the
    pip install selenium
    ```
 
-3. Download and install [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/) and ensure it's in your system PATH.
+3. Download and install [ChromeDriver]( https://pypi.org/project/chromedriver-py/)and ensure it's in your system PATH.
 
 ## Usage
 
@@ -31,4 +31,3 @@ sp = speechify(language='english')
 
 # Convert text to speech
 sp.text2speech("Hello, this is a test of the text-to-speech functionality.")
-
